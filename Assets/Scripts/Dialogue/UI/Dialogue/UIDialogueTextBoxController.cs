@@ -9,6 +9,8 @@ public class UIDialogueTextBoxController : MonoBehaviour, DialogueNodeVisitor
     [SerializeField]
     private TextMeshProUGUI m_DialogueText;
 
+    [SerializeField] private RawImage dialogueIcon;
+
     [SerializeField]
     private RectTransform m_ChoicesBoxTransform;
     [SerializeField]
@@ -46,7 +48,7 @@ public class UIDialogueTextBoxController : MonoBehaviour, DialogueNodeVisitor
     private void OnDialogueNodeStart(DialogueNode node)
     {
         gameObject.SetActive(true);
-
+        dialogueIcon.texture = node.DialogueLine.Speaker.Icon;
         m_DialogueText.text = node.DialogueLine.Text;
         m_SpeakerText.text = node.DialogueLine.Speaker.CharacterName;
 
@@ -55,6 +57,7 @@ public class UIDialogueTextBoxController : MonoBehaviour, DialogueNodeVisitor
 
     private void OnDialogueNodeEnd(DialogueNode node)
     {
+        Debug.Log("Dialogue node end");
         m_NextNode = null;
         m_ListenToInput = false;
         m_DialogueText.text = "";

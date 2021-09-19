@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: NarrationCharacter_Shopkeeper
   m_EditorClassIdentifier: 
   m_CharacterName: Shopkeeper
+  icon: {fileID: 2800000, guid: decdcd8f95133a542b4da76a1dcc8c1e, type: 3}

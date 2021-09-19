@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: NarrationCharacter_Player
   m_EditorClassIdentifier: 
   m_CharacterName: You
+  icon: {fileID: 2800000, guid: 7d3f076c844be4544b24a1cd3e86379e, type: 3}
