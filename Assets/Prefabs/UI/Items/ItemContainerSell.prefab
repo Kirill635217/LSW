@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
+  itemIcon: {fileID: 45720806263358121}
   itemNameText: {fileID: 45720805460888687}
   itemCostText: {fileID: 45720806889207893}
 --- !u!1 &45720806263358123

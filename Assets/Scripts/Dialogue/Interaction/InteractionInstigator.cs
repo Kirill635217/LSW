@@ -13,7 +13,7 @@ public class InteractionInstigator : MonoBehaviour
 
     private void Update()
     {
-        if (HasNearbyInteractables() && Input.GetButtonDown("Submit"))
+        if (HasNearbyInteractables() && Input.GetButtonDown("Dialogue"))
         {
             //Ideally, we'd want to find the best possible interaction (ex: by distance & orientation).
             m_NearbyInteractables[0].DoInteraction();

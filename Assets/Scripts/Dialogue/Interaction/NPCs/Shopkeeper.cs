@@ -19,8 +19,8 @@ public class Shopkeeper : Interactable
         m_DialogueChannel.OnDialogueEnd += OnDialogueNodeEnd;
         playerInventory = FindObjectOfType<PlayerInventory>();
         shopMenu.transform.localScale = Vector3.zero;
-        // Show ShopScrollViewBuy and hide ShopScrollViewSell
-        shopMenu.transform.GetChild(0).gameObject.SetActive(true);
+        // hide ShopScrollViewBuy and hide ShopScrollViewSell
+        shopMenu.transform.GetChild(0).gameObject.SetActive(false);
         shopMenu.transform.GetChild(1).gameObject.SetActive(false);
     }
 

@@ -39,7 +39,7 @@ public class UIDialogueTextBoxController : MonoBehaviour, DialogueNodeVisitor
 
     private void Update()
     {
-        if (m_ListenToInput && Input.GetButtonDown("Submit"))
+        if (m_ListenToInput && Input.GetButtonDown("Dialogue"))
         {
             m_DialogueChannel.RaiseRequestDialogueNode(m_NextNode);
         }

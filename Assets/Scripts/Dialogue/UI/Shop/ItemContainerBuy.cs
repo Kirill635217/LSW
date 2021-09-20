@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class ItemContainerSell : ItemUI
+public class ItemContainerBuy : ItemUI
 {
     [SerializeField] private TextMeshProUGUI itemCostText;
+    
+    [SerializeField] private GameObject lockedItemUI;
+    [SerializeField] private GameObject unlockedItemUI;
 
     // Start is called before the first frame update
     private void Start()
@@ -24,23 +27,31 @@ public class ItemContainerSell : ItemUI
             return;
         itemIsUnlocked = playerInventory.CheckIfItemIsUnlocked(item);
         itemNameText.text = item.name;
-        itemCostText.text = $"+{item.Cost}c";
+        itemCostText.text = item.Cost + "c";
         itemIcon.texture = item.Icon;
+        if (itemIsUnlocked)
+        {
+            lockedItemUI.SetActive(false);
+            unlockedItemUI.SetActive(true);
+        }
+        else
+        {
+            lockedItemUI.SetActive(true);
+            unlockedItemUI.SetActive(false);
+        }
     }
-
-    public void SellItem()
+    
+    public void BuyItem()
     {
         CheckForPlayerAndShopkeeper();
-        shopkeeper.BuyItem(item, this);
+        shopkeeper.SellItem(item, this);
+    }
+
+    public void ItemBought()
+    {
         CheckItem();
     }
 
-    public void ItemSold()
-    {
-        item = null;
-        gameObject.SetActive(false);
-    }
-    
     // Update is called once per frame
     private void Update()
     {

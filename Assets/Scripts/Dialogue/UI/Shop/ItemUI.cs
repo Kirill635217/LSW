@@ -3,10 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class ItemUI : MonoBehaviour
 {
     [SerializeField] protected Item item;
+
+    [SerializeField] protected RawImage itemIcon;
 
     protected bool itemIsUnlocked;
 
