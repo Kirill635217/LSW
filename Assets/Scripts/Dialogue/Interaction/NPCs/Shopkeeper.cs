@@ -18,13 +18,13 @@ public class Shopkeeper : Interactable
     {
         m_DialogueChannel.OnDialogueEnd += OnDialogueNodeEnd;
         playerInventory = FindObjectOfType<PlayerInventory>();
-        shopMenu.SetActive(false);
+        shopMenu.transform.localScale = Vector3.zero;
     }
 
     void OnDialogueNodeEnd(Dialogue dialogue)
     {
         Debug.Log("Shopkeeper node end");
-        shopMenu.SetActive(true);
+        LeanTween.scale(shopMenu, Vector3.one, .3f);
         flowChannel.RaiseFlowStateRequest(dialogueState);
     }
     /// <summary>
@@ -43,7 +43,8 @@ public class Shopkeeper : Interactable
 
     public void CloseShop()
     {
-        shopMenu.SetActive(false);
+        LeanTween.scale(shopMenu, Vector3.zero, .3f);
+        // shopMenu.SetActive(false);
         flowChannel.RaiseFlowStateRequest(gameState);
     }
 
