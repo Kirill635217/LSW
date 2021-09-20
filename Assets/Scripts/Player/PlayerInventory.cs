@@ -9,6 +9,9 @@ public class PlayerInventory : MonoBehaviour
     // current item equipped
     private Item currentItem;
 
+    private int money;
+    public int Money => money;
+
     [SerializeField] private Item hat;
 
     [SerializeField] private GameObject itemSpawn;
@@ -26,6 +29,18 @@ public class PlayerInventory : MonoBehaviour
         {
             ChangeCurrentItem(itemToEquip);
         }
+    }
+
+    public bool UnlockItem(Item itemToUnlock, int cost)
+    {
+        if (!items.Contains(itemToUnlock) && cost <= money)
+        {
+            items.Add(itemToUnlock);
+            money -= cost;
+            return true;
+        }
+
+        return false;
     }
 
     void ChangeCurrentItem(Item itemToChangeTo)

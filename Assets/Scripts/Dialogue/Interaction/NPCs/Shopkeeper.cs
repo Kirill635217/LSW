@@ -11,10 +11,13 @@ public class Shopkeeper : Interactable
 
     [SerializeField] private GameObject shopMenu;
 
+    private PlayerInventory playerInventory;
+
     // Start is called before the first frame update
     void Start()
     {
         m_DialogueChannel.OnDialogueEnd += OnDialogueNodeEnd;
+        playerInventory = FindObjectOfType<PlayerInventory>();
     }
 
     void OnDialogueNodeEnd(Dialogue dialogue)
@@ -22,6 +25,16 @@ public class Shopkeeper : Interactable
         Debug.Log("Shopkeeper node end");
         shopMenu.SetActive(true);
         flowChannel.RaiseFlowStateRequest(dialogueState);
+    }
+
+    public void SellItem(Item item, GameObject lockedItemUI, GameObject unlockedItemUI)
+    {
+        bool isBought = playerInventory.UnlockItem(item, item.Cost);
+        if (isBought)
+        {
+            lockedItemUI.SetActive(false);
+            unlockedItemUI.SetActive(true);
+        }
     }
 
     public void CloseShop()
