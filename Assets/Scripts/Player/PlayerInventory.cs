@@ -36,7 +36,7 @@ public class PlayerInventory : MonoBehaviour
         return false;
     }
 
-    public bool UnlockItem(Item itemToUnlock, int cost)
+    public bool BuyItem(Item itemToUnlock, int cost)
     {
         if (!items.Contains(itemToUnlock) && cost <= money)
         {
@@ -47,11 +47,35 @@ public class PlayerInventory : MonoBehaviour
 
         return false;
     }
+    
+    public bool SellItem(Item itemToUnlock, int cost)
+    {
+        if (items.Contains(itemToUnlock))
+        {
+            items.Remove(itemToUnlock);
+            money += cost;
+            ChangeCurrentItem(null);
+            return true;
+        }
+
+        return false;
+    }
+
+    public List<Item> GetAllItems()
+    {
+        return items;
+    }
 
     void ChangeCurrentItem(Item itemToChangeTo)
     {
+        if (itemToChangeTo == null)
+        {
+            if(itemSpawn.transform.childCount > 0)
+                Destroy(itemSpawn.transform.GetChild(0).gameObject);
+            return;
+        }
         if(itemSpawn.transform.childCount > 0)
-            Destroy(itemSpawn.transform.GetChild(0));
+            Destroy(itemSpawn.transform.GetChild(0).gameObject);
         currentItem = itemToChangeTo;
         GameObject spawnedItem = Instantiate(itemToChangeTo.ItemPrefab, itemSpawn.transform.position,
             itemSpawn.transform.rotation);

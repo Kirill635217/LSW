@@ -4,68 +4,51 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class ItemUI : MonoBehaviour
+public abstract class ItemUI : MonoBehaviour
 {
-    [SerializeField] private Item item;
+    [SerializeField] protected Item item;
 
-    private bool itemIsUnlocked;
+    protected bool itemIsUnlocked;
 
-    private PlayerInventory playerInventory;
-    private Shopkeeper shopkeeper;
-
-    [SerializeField] private GameObject lockedItemUI;
-    [SerializeField] private GameObject unlockedItemUI;
-
-    [SerializeField] private TextMeshProUGUI itemNameText;
-    [SerializeField] private TextMeshProUGUI itemCostText;
+    protected PlayerInventory playerInventory;
+    protected Shopkeeper shopkeeper;
     
+    [SerializeField] protected TextMeshProUGUI itemNameText;
+
     // Start is called before the first frame update
     void Start()
     {
     }
 
-    private void OnEnable()
+    public void SetUp(Item item)
     {
-        playerInventory = FindObjectOfType<PlayerInventory>();
-        shopkeeper = FindObjectOfType<Shopkeeper>();
+        this.item = item;
         CheckItem();
     }
 
-    void CheckItem()
+    protected void OnEnable()
     {
-        itemIsUnlocked = playerInventory.CheckIfItemIsUnlocked(item);
-        itemNameText.text = item.name;
-        itemCostText.text = item.Cost + "c";
-        if (itemIsUnlocked)
-        {
-            lockedItemUI.SetActive(false);
-            unlockedItemUI.SetActive(true);
-        }
-        else
-        {
-            lockedItemUI.SetActive(true);
-            unlockedItemUI.SetActive(false);
-        }
+        CheckItem();
     }
+
+    protected abstract void CheckItem();
 
     public void EquipItem()
     {
+        CheckForPlayerAndShopkeeper();
         playerInventory.EquipItem(item);
     }
     
-    public void BuyItem()
+    protected void CheckForPlayerAndShopkeeper()
     {
-        shopkeeper.SellItem(item, this);
-    }
-    
-    public void UnlockedItem()
-    {
-        CheckItem();
+        if (playerInventory == null)
+            playerInventory = FindObjectOfType<PlayerInventory>();
+        if (shopkeeper == null)
+            shopkeeper = FindObjectOfType<Shopkeeper>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 }

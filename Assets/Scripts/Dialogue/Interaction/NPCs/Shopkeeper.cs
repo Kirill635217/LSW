@@ -19,25 +19,57 @@ public class Shopkeeper : Interactable
         m_DialogueChannel.OnDialogueEnd += OnDialogueNodeEnd;
         playerInventory = FindObjectOfType<PlayerInventory>();
         shopMenu.transform.localScale = Vector3.zero;
+        // Show ShopScrollViewBuy and hide ShopScrollViewSell
+        shopMenu.transform.GetChild(0).gameObject.SetActive(true);
+        shopMenu.transform.GetChild(1).gameObject.SetActive(false);
     }
 
     void OnDialogueNodeEnd(Dialogue dialogue)
     {
-        Debug.Log("Shopkeeper node end");
-        LeanTween.scale(shopMenu, Vector3.one, .3f);
         flowChannel.RaiseFlowStateRequest(dialogueState);
+        ShowBuyMenu();
     }
+
+    public void ShowBuyMenu()
+    {
+        // Show ShopScrollViewBuy and hide ShopScrollViewSell
+        shopMenu.transform.GetChild(0).gameObject.SetActive(true);
+        shopMenu.transform.GetChild(1).gameObject.SetActive(false);
+        LeanTween.scale(shopMenu, Vector3.one, .3f);
+    }
+    
+    public void ShowSellMenu()
+    {
+        // Hide ShopScrollViewBuy and show ShopScrollViewSell
+        shopMenu.transform.GetChild(0).gameObject.SetActive(false);
+        shopMenu.transform.GetChild(1).gameObject.SetActive(true);
+        LeanTween.scale(shopMenu, Vector3.one, .3f);
+    }
+    
     /// <summary>
     /// Sells item to the buyer(player)
     /// </summary>
     /// <param name="item">item to sell</param>
     /// <param name="itemUI">itemUI which called SellItem() from buy button</param>
-    public void SellItem(Item item, ItemUI itemUI)
+    public void SellItem(Item item, ItemContainerBuy itemUI)
     {
-        bool isBought = playerInventory.UnlockItem(item, item.Cost);
+        bool isBought = playerInventory.BuyItem(item, item.Cost);
         if (isBought)
         {
-            itemUI.UnlockedItem();
+            itemUI.ItemBought();
+        }
+    }
+
+    /// <summary>
+    /// Buys an item from the seller(player)
+    /// </summary>
+    /// <param name="item">item to buy</param>
+    public void BuyItem(Item item, ItemContainerSell itemUI)
+    {
+        bool isSold = playerInventory.SellItem(item, item.Cost);
+        if (isSold)
+        {
+            itemUI.ItemSold();
         }
     }
 

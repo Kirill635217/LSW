@@ -57,7 +57,6 @@ public class UIDialogueTextBoxController : MonoBehaviour, DialogueNodeVisitor
 
     private void OnDialogueNodeEnd(DialogueNode node)
     {
-        Debug.Log("Dialogue node end");
         m_NextNode = null;
         m_ListenToInput = false;
         m_DialogueText.text = "";
