@@ -26,14 +26,17 @@ public class Shopkeeper : Interactable
         shopMenu.SetActive(true);
         flowChannel.RaiseFlowStateRequest(dialogueState);
     }
-
-    public void SellItem(Item item, GameObject lockedItemUI, GameObject unlockedItemUI)
+    /// <summary>
+    /// Sells item to the buyer(player)
+    /// </summary>
+    /// <param name="item">item to sell</param>
+    /// <param name="itemUI">itemUI which called SellItem() from buy button</param>
+    public void SellItem(Item item, ItemUI itemUI)
     {
         bool isBought = playerInventory.UnlockItem(item, item.Cost);
         if (isBought)
         {
-            lockedItemUI.SetActive(false);
-            unlockedItemUI.SetActive(true);
+            itemUI.UnlockedItem();
         }
     }
 

@@ -15,3 +15,5 @@ MonoBehaviour:
   icon: {fileID: 10912, guid: 0000000000000000f000000000000000, type: 0}
   itemPrefab: {fileID: 1119836490032266845, guid: ac3afd89c314b6c4094c06485eee2a35,
     type: 3}
+  cost: 10
+  name: Hat

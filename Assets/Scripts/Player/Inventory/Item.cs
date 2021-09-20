@@ -9,8 +9,10 @@ public class Item : ScriptableObject
     [SerializeField] private GameObject itemPrefab;
 
     [SerializeField] private int cost;
+    [SerializeField] private string name;
 
     public Texture Icon => icon;
     public GameObject ItemPrefab => itemPrefab;
     public int Cost => cost;
+    public string Name => name;
 }

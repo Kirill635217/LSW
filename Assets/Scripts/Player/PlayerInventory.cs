@@ -9,7 +9,7 @@ public class PlayerInventory : MonoBehaviour
     // current item equipped
     private Item currentItem;
 
-    private int money;
+    private int money = 50;
     public int Money => money;
 
     [SerializeField] private Item hat;
@@ -19,8 +19,6 @@ public class PlayerInventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        items.Add(hat);
-        EquipItem(hat);
     }
 
     public void EquipItem(Item itemToEquip)
@@ -29,6 +27,13 @@ public class PlayerInventory : MonoBehaviour
         {
             ChangeCurrentItem(itemToEquip);
         }
+    }
+
+    public bool CheckIfItemIsUnlocked(Item itemToCheck)
+    {
+        if (items.Contains(itemToCheck))
+            return true;
+        return false;
     }
 
     public bool UnlockItem(Item itemToUnlock, int cost)
