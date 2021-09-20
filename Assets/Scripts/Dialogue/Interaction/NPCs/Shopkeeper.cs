@@ -18,6 +18,7 @@ public class Shopkeeper : Interactable
     {
         m_DialogueChannel.OnDialogueEnd += OnDialogueNodeEnd;
         playerInventory = FindObjectOfType<PlayerInventory>();
+        shopMenu.SetActive(false);
     }
 
     void OnDialogueNodeEnd(Dialogue dialogue)
